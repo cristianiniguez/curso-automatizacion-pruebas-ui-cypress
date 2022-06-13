@@ -19,4 +19,18 @@ describe('Locator Types', () => {
 	it('Get by class', () => {
 		cy.get('.mr-sm-2.form-control')
 	})
+
+	it('Using contains', () => {
+		cy.contains('Reading')
+		cy.contains('.header-wrapper', 'Widgets')
+	})
+
+	it('Using parent', () => {
+		cy.get('input[placeholder="First Name"]').parent()
+		cy.get('input[placeholder="First Name"]').parents()
+	})
+
+	it('Using find', () => {
+		cy.get('form').find('label')
+	})
 })
