@@ -8,7 +8,12 @@ module.exports = defineConfig({
 			'**/2-advanced-examples/*.js',
 		],
 		setupNodeEvents(on, config) {
-			// implement node event listeners here
+			on('task', {
+				log(message) {
+					console.log(`Task console.log: ${message}`)
+					return null
+				},
+			})
 		},
 		viewportHeight: 1080,
 		viewportWidth: 1920,
