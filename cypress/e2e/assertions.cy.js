@@ -1,6 +1,13 @@
 describe('Assertions', () => {
-	it('Assertion', () => {
+	before(() => {
 		cy.visit('/automation-practice-form')
+	})
+
+	after(() => {
+		cy.visit('/')
+	})
+
+	it('Assertion', () => {
 		cy.url().should('include', 'demoqa.com')
 
 		cy.get('#firstName')
@@ -9,7 +16,6 @@ describe('Assertions', () => {
 	})
 
 	it('Assertion 2', () => {
-		cy.visit('/automation-practice-form')
 		cy.get('#firstName').then((element) => {
 			expect(element).to.be.visible
 			expect(element).to.have.attr('placeholder', 'First Name')
@@ -17,7 +23,6 @@ describe('Assertions', () => {
 	})
 
 	it('Assertion 3', () => {
-		cy.visit('/automation-practice-form')
 		cy.get('#firstName').then((element) => {
 			assert.equal(element.attr('placeholder'), 'First Name')
 		})
