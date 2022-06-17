@@ -42,7 +42,7 @@ describe('Interacting with the elements', () => {
 		cy.get('button').eq(3).parent().parent().click(5, 60)
 	})
 
-	it.only('Input type text', () => {
+	it('Input type text', () => {
 		cy.visit('/automation-practice-form')
 
 		cy.get('#firstName').type('Someone')
@@ -51,5 +51,13 @@ describe('Interacting with the elements', () => {
 		cy.get('#firstName').type('{selectAll}{backSpace}')
 		cy.get('#firstName').type('Anyone')
 		cy.get('#firstName').clear()
+	})
+
+	it.only('Checkboxes y radio buttons', () => {
+		cy.visit('/automation-practice-form')
+
+		cy.get('label[for="gender-radio-1"]').click()
+
+		cy.get('label[for="hobbies-checkbox-1"]').click()
 	})
 })
