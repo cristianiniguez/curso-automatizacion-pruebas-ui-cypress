@@ -1,4 +1,4 @@
-describe('Navigation', () => {
+describe('Navigation', { browser: '!chrome' }, () => {
 	it('Visit to our first page', () => {
 		cy.visit('https://www.platzi.com')
 	})
