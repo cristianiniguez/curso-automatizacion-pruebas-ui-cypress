@@ -34,11 +34,22 @@ describe('Interacting with the elements', () => {
 		cy.get('#enableAfter').click({ force: true, timeout: 0 })
 	})
 
-	it.only('Click by position', () => {
+	it('Click by position', () => {
 		cy.visit('/buttons')
 
 		cy.get('button').eq(3).parent().parent().click('topRight')
 		cy.get('button').eq(3).parent().parent().click('bottomLeft')
 		cy.get('button').eq(3).parent().parent().click(5, 60)
+	})
+
+	it.only('Input type text', () => {
+		cy.visit('/automation-practice-form')
+
+		cy.get('#firstName').type('Someone')
+		cy.get('#lastName').type('Else')
+
+		cy.get('#firstName').type('{selectAll}{backSpace}')
+		cy.get('#firstName').type('Anyone')
+		cy.get('#firstName').clear()
 	})
 })
