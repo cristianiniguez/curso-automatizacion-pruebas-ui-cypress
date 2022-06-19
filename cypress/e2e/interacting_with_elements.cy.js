@@ -104,7 +104,7 @@ describe('Interacting with the elements', () => {
 		})
 	})
 
-	it.only('Interacting with tables', () => {
+	it('Interacting with tables', () => {
 		cy.visit('https://www.w3schools.com/html/html_tables.asp')
 
 		cy.get('#customers')
@@ -140,5 +140,13 @@ describe('Interacting with the elements', () => {
 			.eq(1)
 			.invoke('text')
 			.should('equal', 'Maria Anders')
+	})
+
+	it.only('Interacting with date pickers', function () {
+		cy.visit('https://material.angular.io/components/datepicker/overview')
+
+		cy.get('datepicker-overview-example').find('input').type('11/03/2022')
+
+		cy.get('datepicker-overview-example').find('svg').click()
 	})
 })
