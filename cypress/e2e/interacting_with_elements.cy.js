@@ -63,7 +63,7 @@ describe('Interacting with the elements', () => {
 		cy.get('label[for="hobbies-checkbox-1"]').click()
 	})
 
-	it.only('Extracting information', function () {
+	it('Extracting information', function () {
 		cy.visit('/automation-practice-form')
 
 		cy.get('#firstName').as('firstName')
@@ -78,12 +78,29 @@ describe('Interacting with the elements', () => {
 		cy.get('@firstName').invoke('val').as('globalFirstName')
 	})
 
-	it.only('Sharing information', function () {
+	it('Sharing information', function () {
 		cy.visit('/automation-practice-form')
 
 		cy.get('#lastName').as('lastName')
 		cy.get('@lastName').type(text)
 
 		cy.get('#firstName').type(this.globalFirstName)
+	})
+
+	it('Interacting with dropdown', () => {
+		cy.visit('https://itera-qa.azurewebsites.net/home/automation')
+
+		cy.get('.custom-select').select(10)
+		cy.get('.custom-select').select('3').should('have.value', '3')
+		cy.get('.custom-select').select('Greece').should('have.value', '4')
+	})
+
+	it.only('Interacting with dynamic dropdown', () => {
+		cy.visit('https://react-select.com/home')
+
+		cy.get('.basic-single .select__input').type('R')
+		cy.get('.basic-single .select__option').each(($el) => {
+			if ($el.text() === 'Red') $el.click()
+		})
 	})
 })
