@@ -2,7 +2,7 @@
 
 Avance del [Curso de Automatización de Pruebas UI con Cypress](https://platzi.com/cursos/cypress-ui/) de Platzi
 
-<p style="text-align: center">
+<p align="center">
   <img src="https://static.platzi.com/media/achievements/piezas-automatizacion-pruebas-ui-cypress_badge-df11ed0c-1876-4ece-9dcd-e25949f182a7.png" alt="Badge del Curso de Automatización de Pruebas UI con Cypress de Platzi" width=100 />
 </p>
 
