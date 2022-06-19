@@ -95,12 +95,50 @@ describe('Interacting with the elements', () => {
 		cy.get('.custom-select').select('Greece').should('have.value', '4')
 	})
 
-	it.only('Interacting with dynamic dropdown', () => {
+	it('Interacting with dynamic dropdown', () => {
 		cy.visit('https://react-select.com/home')
 
 		cy.get('.basic-single .select__input').type('R')
 		cy.get('.basic-single .select__option').each(($el) => {
 			if ($el.text() === 'Red') $el.click()
 		})
+	})
+
+	it.only('Interacting with tables', () => {
+		cy.visit('https://www.w3schools.com/html/html_tables.asp')
+
+		cy.get('#customers')
+			.find('th')
+			.each(($el) => {
+				cy.log($el.text())
+			})
+
+		cy.get('#customers')
+			.find('th')
+			.first()
+			.invoke('text')
+			.should('equal', 'Company')
+
+		cy.get('#customers')
+			.find('th')
+			.last()
+			.invoke('text')
+			.should('equal', 'Country')
+
+		cy.get('#customers')
+			.find('th')
+			.eq(1)
+			.invoke('text')
+			.should('equal', 'Contact')
+
+		cy.get('#customers').find('tr').should('have.length', 7)
+
+		cy.get('#customers')
+			.find('tr')
+			.eq(1)
+			.find('td')
+			.eq(1)
+			.invoke('text')
+			.should('equal', 'Maria Anders')
 	})
 })
