@@ -1,4 +1,6 @@
 describe('Interacting with the elements', () => {
+	let text
+
 	it('Click', () => {
 		cy.visit('/buttons')
 
@@ -53,11 +55,35 @@ describe('Interacting with the elements', () => {
 		cy.get('#firstName').clear()
 	})
 
-	it.only('Checkboxes y radio buttons', () => {
+	it('Checkboxes y radio buttons', () => {
 		cy.visit('/automation-practice-form')
 
 		cy.get('label[for="gender-radio-1"]').click()
 
 		cy.get('label[for="hobbies-checkbox-1"]').click()
+	})
+
+	it.only('Extracting information', function () {
+		cy.visit('/automation-practice-form')
+
+		cy.get('#firstName').as('firstName')
+		cy.get('@firstName').type('Someone')
+
+		cy.get('@firstName').then(($firstName) => {
+			text = $firstName.val()
+			expect($firstName.val()).to.equal('Someone')
+		})
+
+		cy.get('@firstName').invoke('val').should('equal', 'Someone')
+		cy.get('@firstName').invoke('val').as('globalFirstName')
+	})
+
+	it.only('Sharing information', function () {
+		cy.visit('/automation-practice-form')
+
+		cy.get('#lastName').as('lastName')
+		cy.get('@lastName').type(text)
+
+		cy.get('#firstName').type(this.globalFirstName)
 	})
 })
