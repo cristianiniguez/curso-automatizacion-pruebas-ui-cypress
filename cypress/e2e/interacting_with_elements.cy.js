@@ -142,11 +142,50 @@ describe('Interacting with the elements', () => {
 			.should('equal', 'Maria Anders')
 	})
 
-	it.only('Interacting with date pickers', function () {
+	it('Interacting with date pickers', function () {
 		cy.visit('https://material.angular.io/components/datepicker/overview')
 
 		cy.get('datepicker-overview-example').find('input').type('11/03/2022')
 
 		cy.get('datepicker-overview-example').find('svg').click()
+	})
+
+	it('Interacting with modals', function () {
+		cy.visit('/modal-dialogs')
+
+		cy.get('#showSmallModal').click()
+		cy.get('#closeSmallModal').click()
+	})
+
+	it('Interacting with popups', function () {
+		cy.visit('/alerts')
+
+		const stub = cy.stub()
+		cy.on('window:confirm', stub)
+
+		cy.get('#confirmButton')
+			.click()
+			.then(() => {
+				expect(stub.getCall(0)).to.be.calledWith(
+					'Do you confirm action?'
+				)
+			})
+
+		cy.on('window:confirm', (confirm) => {
+			expect(confirm).to.equal('Do you confirm action?')
+			return false
+		})
+
+		cy.contains('You selected Cancel').should('exist')
+	})
+
+	it.only('Interacting with tooltips', () => {
+		cy.visit('/tool-tips')
+
+		cy.get('#toolTipButton').trigger('mouseover')
+		cy.contains('You hovered over the Button').should('exist')
+
+		cy.get('#toolTipButton').trigger('mouseout')
+		cy.contains('You hovered over the Button').should('not.exist')
 	})
 })
